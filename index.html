@@ -38,19 +38,19 @@
             </li>
             <li>
             <strong> 1. Sobre la Eucaristía como centro de la vida de la Iglesia:</strong>
-            > «La sagrada Eucaristía no es un mero adorno de la Iglesia… Es el corazón de la Iglesia, su esencia, su centro, su vida… tan necesario a nuestra vida como el aire a los pulmones.» 
+             «La sagrada Eucaristía no es un mero adorno de la Iglesia… Es el corazón de la Iglesia, su esencia, su centro, su vida… tan necesario a nuestra vida como el aire a los pulmones.» 
             </li>
             <li>
             <strong>2. Sobre la liturgia como medio de unión con Cristo:</strong>
-            > «La liturgia es, en Cristo, por Cristo y con Cristo la grande obrera… conformarlos y unirlos a Él… es el gran sacerdocio de Cristo realizado y practicado entre nosotros.»
+             «La liturgia es, en Cristo, por Cristo y con Cristo la grande obrera… conformarlos y unirlos a Él… es el gran sacerdocio de Cristo realizado y practicado entre nosotros.»
             </li>
             <li>
             <strong>3. Sobre la acción social inspirada en la fe:</strong>
-            > «¿Qué es Acción Social Católica? Es un viaje de ida y vuelta, que empieza, el de ida, en Cristo y termina en el pueblo, y empieza en el pueblo, el de vuelta, y termina en Cristo.»
+             «¿Qué es Acción Social Católica? Es un viaje de ida y vuelta, que empieza, el de ida, en Cristo y termina en el pueblo, y empieza en el pueblo, el de vuelta, y termina en Cristo.»
             </li>
             <li>
             <strong>4. Compromiso frente a la pobreza y el sufrimiento:</strong>
-            > «Para mis pasos yo no quiero más que un camino, el que lleva al Sagrario… encontraré hambrientos de muchas clases… y haré descender sobre ellos la alegría de la vida y de la salud.»
+             «Para mis pasos yo no quiero más que un camino, el que lleva al Sagrario… encontraré hambrientos de muchas clases… y haré descender sobre ellos la alegría de la vida y de la salud.»
             </li>
             </ul>
         </section>
@@ -155,6 +155,10 @@
             </div>
             </div>
         </section>
+        <section id="jugar-trivia">
+            <h2>¿Te animas a poner a prueba tus conocimientos?</h2>
+        <button id="abrirTrivia">Comenzar Trivia</button>
+        </section>
     </main>
     <footer>
         <p>© 2025 Taller de Informática</p>
@@ -171,5 +175,149 @@
         </i>
         </a>
     </footer>
+     <!-- ESTILOS PARA EL MODAL-->
+<style>
+    .modal {
+     display: none; /* oculto hasta abrir */
+     position: fixed;
+     left: 0; top: 0;
+     width: 100%; height: 100%;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 1000;
+    }
+    .modal-contenido {
+     background: rgb(248, 193, 255);
+     margin: 5% auto;
+     padding: 20px;
+     border-radius: 10px;
+     max-width: 600px; 
+     max-height: 80vh;
+ overflow-y: auto;
+}
+.cerrar { float: right; cursor: pointer; font-size: 24px; }
+</style> 
+</head>
+<body>
+    <!-- Modal -->
+     <div id="modalTrivia" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar">&times;</span>
+    <h2>Trivia sobre el Beato Manuel Segura</h2>
+
+    <form id="formTrivia">
+      <p><strong>1.</strong> ¿En qué año nació?</p>
+      <label><input type="radio" name="p1" value="1890"> 1890</label><br>
+      <label><input type="radio" name="p1" value="1885"> 1885</label><br>
+      <label><input type="radio" name="p1" value="1881"> 1881</label><br><br>
+
+      <p><strong>2.</strong> ¿En qué lugar lo fusilaron?</p>
+      <label><input type="radio" name="p2" value="En Gabasa"> En Gabasa</label><br>
+      <label><input type="radio" name="p2" value="En Alemania"> En Alemania</label><br>
+      <label><input type="radio" name="p2" value="En Almonacid de la Sierra"> En Almonacid de la Sierra</label><br><br>
+
+      <p><strong>3.</strong> ¿Qué gritó antes de morir?</p>
+      <label><input type="radio" name="p3" value="Viva España"> Viva España</label><br>
+      <label><input type="radio" name="p3" value="Viva Cristo Rey"> Viva Cristo Rey</label><br>
+      <label><input type="radio" name="p3" value="Perdon, Señor"> Perdón, Señor</label><br><br>
+
+      <p><strong>4.</strong> ¿Qué les dijo el padre Segura a los novicios?</p>
+      <label><input type="radio" name="p4" value="Que pasaran del deporte al martirio"> Que pasaran del deporte al martirio</label><br>
+      <label><input type="radio" name="p4" value="Que se escondieran en la capilla"> Que se escondieran en la capilla</label><br>
+      <label><input type="radio" name="p4" value="Que escaparan rapido"> Que escaparan rápido</label><br><br>
+
+      <p><strong>5.</strong> ¿En qué año fue ordenado sacerdote?</p>
+      <label><input type="radio" name="p5" value="1899"> 1899</label><br>
+      <label><input type="radio" name="p5" value="1930"> 1930</label><br>
+      <label><input type="radio" name="p5" value="1907"> 1907</label><br><br>
+
+      <button type="submit">Enviar respuestas</button>
+    </form>
+
+    <div id="resultado"></div>
+  </div>
+</div>
+<script>
+  const modal = document.getElementById("modalTrivia");
+  const btnAbrir = document.getElementById("abrirTrivia");
+  const btnCerrar = document.querySelector("cerrarTrivia");
+
+  btnAbrir.onclick = () => { modal.style.display = "block"; };
+  btnCerrar.onclick = () => { modal.style.display = "none"; };
+  window.onclick = (event) => { if (event.target === modal) modal.style.display = "none"; };
+
+  document.getElementById("formTrivia").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let puntaje = 0;
+    let resultado = "";
+
+    // Pregunta 1
+    let r1 = document.querySelector('input[name="p1"]:checked');
+    if (r1) {
+ if (r1.value === "1881") {
+ puntaje++;
+ salida += "<p class='correcta'>1.  Correcta</p>";
+ } else {
+ salida += "<p class='incorrecta'>1.  Incorrecta. Correcta: 1881</p>";
+ }
+ } else {
+ salida += "<p class='incorrecta'>1.  No respondida. Correcta: 1881</p>";
+ }
+
+    // Pregunta 2
+    if (r2) {
+ if (r2.value === "En Gabasa") {
+ puntaje++;
+ salida += "<p class='correcta'>2.  Correcta</p>";
+ } else {
+ salida += "<p class='incorrecta'>2.  Incorrecta. Correcta: En Gabasa</p>";
+ }
+ } else {
+ salida += "<p class='incorrecta'>2.  No respondida. Correcta: En Gabasa</p>";
+ }
+
+    // Pregunta 3
+    if (r3) {
+ if (r3.value === "Viva Cristo Rey") {
+ puntaje++;
+ salida += "<p class='correcta'>3.  Correcta</p>";
+ } else {
+ salida += "<p class='incorrecta'>3.  Incorrecta. Correcta: Viva Cristo Rey</p>";
+ }
+ } else {
+ salida += "<p class='incorrecta'>3.  No respondida. Correcta: Viva Cristo Rey</p>";
+ }
+
+    // Pregunta 4
+    if (r4) {
+ if (r4.value === "Que pasaran del deporte al martirio") {
+ puntaje++;
+ salida += "<p class='correcta'>4.  Correcta</p>";
+ } else {
+ salida += "<p class='incorrecta'>4.  Incorrecta. Correcta: Que pasaran del deporte al martirio</p>";
+ }
+ } else {
+ salida += "<p class='incorrecta'>4.  No respondida. Correcta: Que pasaran del deporte al martirio</p>";
+ }
+
+    // Pregunta 5
+   if (r5) {
+ if (r5.value === "1907") {
+ puntaje++;
+ salida += "<p class='correcta'>5.  Correcta</p>";
+ } else {
+ salida += "<p class='incorrecta'>5.  Incorrecta. Correcta: 1907</p>";
+ }
+ } else {
+ salida += "<p class='incorrecta'>5.  No respondida. Correcta: 1907</p>";
+ }
+
+    resultado += `<h4>Puntaje final: ${puntaje} de 5</h4>`;
+    if (puntaje === 5) resultado += "🎉 ¡Excelente trabajo!";
+    else if (puntaje >= 3) resultado += "👏 Muy bien, conoces bastante sobre Manuel Segura.";
+    else resultado += "💡 Puedes repasar la página para saber más.";
+
+    document.getElementById("resultado").innerHTML = resultado;
+  });
+</script>
 </body>
 </html>
